@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eibifri-maker.github.io/1stgeniusai/sitemap.xml
