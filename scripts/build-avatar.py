@@ -1,0 +1,132 @@
+import sys
+FACE="M400 135 C300 135 242 205 240 312 C238 382 242 440 264 496 C287 546 337 576 400 576 C463 576 513 546 536 496 C558 440 562 382 560 312 C558 205 500 135 400 135 Z"
+
+def build(variant="polo", glasses=True, animated=False, circle=False):
+    suit = variant=="suit"
+    body = ('''<path d="M40 800 C50 660 170 612 300 592 L500 592 C630 612 750 660 760 800 Z" fill="#161B2E"/>
+    <path d="M300 592 L400 700 L500 592 L462 566 L338 566 Z" fill="#F4F6FB"/>
+    <path d="M300 592 L372 800 L260 800 C250 690 262 620 300 592 Z" fill="#0F1426"/>
+    <path d="M500 592 L428 800 L540 800 C550 690 538 620 500 592 Z" fill="#0F1426"/>
+    <path d="M300 592 L352 660 L400 700 L372 620 Z" fill="#0A0F20"/><path d="M500 592 L448 660 L400 700 L428 620 Z" fill="#0A0F20"/>
+    <path d="M300 592 L400 700 M500 592 L400 700" stroke="#22D3EE" stroke-opacity=".5" stroke-width="3" fill="none"/>
+    ''' if suit else '''<path d="M40 800 C50 660 170 612 300 592 L500 592 C630 612 750 660 760 800 Z" fill="#0B0B14"/>
+    <path d="M300 592 L350 650 L400 612 L450 650 L500 592 L462 566 L338 566 Z" fill="#181826" stroke="#2C2C44" stroke-width="3"/>
+    <path d="M400 612 V720" stroke="#2C2C44" stroke-width="3"/><circle cx="400" cy="650" r="6" fill="#dfe3f0"/><circle cx="400" cy="690" r="6" fill="#dfe3f0"/>
+    <g transform="translate(520 676)"><rect width="34" height="22" fill="#fff" rx="2"/><rect width="17" height="11" fill="#1F3B8A"/><rect x="17" y="11" width="17" height="11" fill="#D7263D"/></g>
+    <path d="M40 800 C50 660 170 612 300 592" stroke="#22D3EE" stroke-opacity=".6" stroke-width="3" fill="none"/>
+    <path d="M760 800 C750 660 630 612 500 592" stroke="#E879F9" stroke-opacity=".6" stroke-width="3" fill="none"/>''')
+
+    eyes_y=372
+    def eye(cx,side):
+        s = -1 if side=="L" else 1
+        return f'''<g class="eye">
+      <path d="M{cx-38} {eyes_y} C{cx-20} {eyes_y-24} {cx+20} {eyes_y-24} {cx+38} {eyes_y} C{cx+20} {eyes_y+17} {cx-20} {eyes_y+17} {cx-38} {eyes_y} Z" fill="#F4F1EE"/>
+      <circle cx="{cx}" cy="{eyes_y-2}" r="17" fill="url(#iris)"/><circle cx="{cx}" cy="{eyes_y-2}" r="7.5" fill="#0B1230"/>
+      <circle cx="{cx-6}" cy="{eyes_y-9}" r="4.5" fill="#fff"/><circle cx="{cx+7}" cy="{eyes_y+3}" r="2" fill="#fff" opacity=".7"/>
+      <path d="M{cx-40} {eyes_y+1} C{cx-20} {eyes_y-28} {cx+20} {eyes_y-28} {cx+40} {eyes_y+1}" stroke="#3B2A20" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M{cx-30} {eyes_y+22} C{cx-10} {eyes_y+30} {cx+10} {eyes_y+30} {cx+30} {eyes_y+22}" stroke="#C98B6F" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+      <path d="M{cx-38} {eyes_y} C{cx-20} {eyes_y-24} {cx+20} {eyes_y-24} {cx+38} {eyes_y} L{cx+38} {eyes_y-30} L{cx-38} {eyes_y-30} Z" fill="url(#skin)" class="lid" style="transform-origin:{cx}px {eyes_y-24}px"/>
+    </g>'''
+    gl = '''<g filter="url(#glow2)">
+      <rect x="262" y="338" width="116" height="78" rx="16" fill="url(#lens)" stroke="#0B1020" stroke-width="11"/>
+      <rect x="422" y="338" width="116" height="78" rx="16" fill="url(#lens)" stroke="#0B1020" stroke-width="11"/>
+      <path d="M378 358 Q400 346 422 358" stroke="#0B1020" stroke-width="10" fill="none"/>
+      <path d="M262 356 L238 350 M538 356 L562 350" stroke="#0B1020" stroke-width="10" stroke-linecap="round"/></g>
+    <rect x="262" y="338" width="116" height="78" rx="16" fill="none" stroke="#22D3EE" stroke-width="2.5"/>
+    <rect x="422" y="338" width="116" height="78" rx="16" fill="none" stroke="#E879F9" stroke-width="2.5"/>
+    <path d="M276 356 L312 356 M436 356 L472 356" stroke="#fff" stroke-opacity=".55" stroke-width="4" stroke-linecap="round"/>''' if glasses else ""
+
+    anim = '''<style>
+  .pulse{animation:pulse 4s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .lid{animation:blink 5s infinite}@keyframes blink{0%,92%,100%{transform:scaleY(.01)}95%{transform:scaleY(1)}}
+  .float{animation:fl 6s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .dash{animation:rot 40s linear infinite;transform-origin:400px 400px}@keyframes rot{to{transform:rotate(360deg)}}
+</style>''' if animated else "<style>.lid{transform:scaleY(.01)}</style>"
+    if not animated: anim="<style>.lid{display:none}</style>"
+    clip = '<clipPath id="shape">' + ('<circle cx="400" cy="400" r="380"/>' if circle else '<path d="M400 40 L725 220 L725 580 L400 760 L75 580 L75 220 Z"/>') + '</clipPath>'
+    frame = ('<circle cx="400" cy="400" r="380" fill="none" stroke="url(#neon)" stroke-width="12" filter="url(#glow)"/>' if circle else
+             '<path d="M400 40 L725 220 L725 580 L400 760 L75 580 L75 220 Z" fill="none" stroke="url(#neon)" stroke-width="10" stroke-linejoin="round" filter="url(#glow)"/>')
+    badge = '' if circle else '''<g transform="translate(400 735)"><rect x="-130" y="-26" width="260" height="52" rx="26" fill="#010B28" stroke="url(#neon)" stroke-width="3"/>
+    <text text-anchor="middle" y="9" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="26" fill="#F2F4FA" letter-spacing="1">1st<tspan fill="#22D3EE">genius</tspan><tspan fill="#E879F9">AI</tspan></text></g>'''
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Avatar 1stgeniusAI">
+  {anim}
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#1B2C5C"/><stop offset="1" stop-color="#010B28"/></radialGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#6051EB"/><stop offset="1" stop-color="#E879F9"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4C7A5"/><stop offset="1" stop-color="#DB9C7A"/></linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#85633F"/><stop offset="1" stop-color="#4B3524"/></linearGradient>
+    <radialGradient id="iris" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#DDF3FF"/><stop offset=".6" stop-color="#8CBFE0"/><stop offset="1" stop-color="#4C86B4"/></radialGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE" stop-opacity=".30"/><stop offset="1" stop-color="#E879F9" stop-opacity=".22"/></linearGradient>
+    <linearGradient id="rimL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22D3EE" stop-opacity=".28"/><stop offset=".22" stop-color="#22D3EE" stop-opacity="0"/></linearGradient>
+    <linearGradient id="rimR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#E879F9" stop-opacity=".28"/><stop offset=".22" stop-color="#E879F9" stop-opacity="0"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".6" stop-color="#7A3B2A" stop-opacity="0"/><stop offset="1" stop-color="#7A3B2A" stop-opacity=".25"/></linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="stubble" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 .30  0 0 0 0 .24  0 0 0 0 .20  0 0 0 -9 4.6"/></filter>
+    <filter id="grey" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="21" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 .85  0 0 0 0 .83  0 0 0 0 .80  0 0 0 -9 4.0"/></filter>
+    <linearGradient id="fadeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient><mask id="gm" maskUnits="userSpaceOnUse" x="200" y="470" width="400" height="140"><rect x="200" y="470" width="400" height="140" fill="url(#fadeG)"/></mask>
+    <clipPath id="face"><path d="{FACE}"/></clipPath>
+    <clipPath id="beardZone"><path d="M236 405 C250 520 320 578 400 580 C480 578 550 520 564 405 C556 452 528 478 496 476 C468 466 436 462 400 462 C364 462 332 466 304 476 C272 478 244 452 236 405 Z"/></clipPath>
+    {clip}
+  </defs>
+  <rect width="800" height="800" fill="#010B28"/>
+  <g clip-path="url(#shape)">
+    <rect width="800" height="800" fill="url(#bg)"/>
+    <g stroke="#22D3EE" stroke-opacity=".35" stroke-width="3" fill="none" stroke-linecap="round" class="pulse">
+      <path d="M90 300 H190 L230 340 H290"/><path d="M90 380 H150 L190 420"/><path d="M110 520 H210 L250 560 H310"/></g>
+    <g stroke="#E879F9" stroke-opacity=".4" stroke-width="3" fill="none" stroke-linecap="round" class="pulse">
+      <path d="M710 300 H610 L570 340 H510"/><path d="M710 380 H650 L610 420"/><path d="M690 520 H590 L550 560 H490"/></g>
+    <g fill="#22D3EE"><circle cx="90" cy="300" r="6"/><circle cx="190" cy="420" r="6"/><circle cx="110" cy="520" r="6"/><circle cx="160" cy="200" r="3"/><circle cx="200" cy="150" r="2"/></g>
+    <g fill="#E879F9"><circle cx="710" cy="300" r="6"/><circle cx="610" cy="420" r="6"/><circle cx="690" cy="520" r="6"/><circle cx="640" cy="200" r="3"/><circle cx="600" cy="150" r="2"/></g>
+    <circle class="dash" cx="400" cy="400" r="292" fill="none" stroke="url(#neon)" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 14"/>
+    <circle cx="400" cy="340" r="235" fill="#6051EB" opacity=".30" filter="url(#glow)"/>
+    <g class="float">
+    {body}
+    <path d="M338 520 L338 586 Q400 632 462 586 L462 520 Z" fill="#D2906F"/>
+    <path d="M338 560 Q400 600 462 560 L462 586 Q400 632 338 586 Z" fill="#B87558" opacity=".55"/>
+    <ellipse cx="236" cy="392" rx="26" ry="44" fill="#E3AB8B"/><ellipse cx="564" cy="392" rx="26" ry="44" fill="#E3AB8B"/>
+    <path d="{FACE}" fill="url(#skin)"/>
+    <g clip-path="url(#face)">
+      <rect x="200" y="100" width="400" height="500" fill="url(#shade)"/>
+      <rect x="200" y="100" width="400" height="500" fill="url(#rimL)"/><rect x="200" y="100" width="400" height="500" fill="url(#rimR)"/>
+      <ellipse cx="310" cy="440" rx="40" ry="18" fill="#E58A7A" opacity=".25"/><ellipse cx="490" cy="440" rx="40" ry="18" fill="#E58A7A" opacity=".25"/>
+      <!-- barba curta com textura -->
+      <g clip-path="url(#beardZone)"><rect x="200" y="380" width="400" height="220" fill="#6B5648" opacity=".22"/>
+        <rect x="200" y="380" width="400" height="220" filter="url(#stubble)"/><g mask="url(#gm)"><rect x="200" y="470" width="400" height="140" filter="url(#grey)" opacity=".7"/></g></g>
+    </g>
+    <!-- bigode fino -->
+    <path d="M352 454 C374 438 392 446 400 452 C408 446 426 438 448 454 C430 462 418 458 400 462 C382 458 370 462 352 454 Z" fill="#5A4636" opacity=".8"/>
+    <path d="M368 490 C386 500 414 500 432 490" stroke="#8F5148" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M378 489 C392 495 408 495 422 489" stroke="#EBA7A0" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- nariz -->
+    <path d="M400 352 C390 392 374 412 374 424 C374 442 426 442 426 424 C426 412 410 392 400 352 Z" fill="#C98A6D" opacity=".7"/>
+    <path d="M388 440 C396 446 404 446 412 440" stroke="#9E6350" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+    <!-- sobrancelhas -->
+    <path d="M276 336 C302 316 346 316 370 334" stroke="#47321F" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M430 334 C454 316 498 316 524 336" stroke="#47321F" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <!-- rugas da testa -->
+    <path d="M330 262 C370 252 430 252 470 262" stroke="#C98A6D" stroke-width="3" fill="none" opacity=".35" stroke-linecap="round"/>
+    {eye(322,"L")}{eye(478,"R")}
+    {gl}
+    <!-- cabelo penteado para trás, entradas -->
+    <path d="M236 360 C206 224 276 98 400 96 C524 98 594 224 564 360 C562 318 556 286 540 262 C520 226 480 206 400 204 C320 206 280 226 260 262 C244 286 238 318 236 360 Z" fill="url(#hair)"/>
+    <g stroke="#A27E58" stroke-width="5" stroke-linecap="round" fill="none" opacity=".7">
+      <path d="M290 222 C340 160 450 150 520 196"/><path d="M272 250 C330 188 460 180 540 236"/><path d="M262 282 C320 224 470 214 552 270"/>
+      <path d="M330 206 C370 150 440 144 486 176"/></g>
+    <path d="M246 332 C240 296 250 266 272 240" stroke="#B8B2AA" stroke-width="7" stroke-linecap="round" fill="none" opacity=".75"/>
+    <path d="M554 332 C560 296 550 266 528 240" stroke="#B8B2AA" stroke-width="7" stroke-linecap="round" fill="none" opacity=".75"/>
+    <path d="M300 130 C340 110 420 104 480 124" stroke="#fff" stroke-opacity=".25" stroke-width="10" stroke-linecap="round" fill="none"/>
+    </g>
+  </g>
+  {frame}
+  {badge}
+</svg>'''
+if __name__=="__main__":
+    out="assets/avatar/"
+    open(out+"avatar.svg","w").write(build())
+    open(out+"avatar-sem-oculos.svg","w").write(build(glasses=False))
+    open(out+"avatar-terno.svg","w").write(build(variant="suit"))
+    open(out+"avatar-animado.svg","w").write(build(animated=True))
+    open(out+"avatar-circulo.svg","w").write(build(circle=True))
