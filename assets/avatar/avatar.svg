@@ -13,7 +13,7 @@
       <stop offset="0" stop-color="#7A5A3E"/><stop offset="1" stop-color="#4A3426"/>
     </linearGradient>
     <linearGradient id="beard" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5A4333"/><stop offset=".7" stop-color="#6B5A4E"/><stop offset="1" stop-color="#A9A39C"/>
+      <stop offset="0" stop-color="#6A5546"/><stop offset=".6" stop-color="#7A6A5E"/><stop offset="1" stop-color="#B5AFA8"/>
     </linearGradient>
     <radialGradient id="iris" cx="50%" cy="45%" r="55%">
       <stop offset="0" stop-color="#CFEFFF"/><stop offset=".6" stop-color="#7FB8DE"/><stop offset="1" stop-color="#3F7FB0"/>
@@ -59,11 +59,10 @@
     <!-- cabeça (grande, caricatura) -->
     <path d="M400 125 C255 125 218 250 226 360 C232 470 290 565 400 565 C510 565 568 470 574 360 C582 250 545 125 400 125 Z" fill="url(#skin)"/>
 
-    <!-- barba grisalha -->
-    <path d="M232 380 C236 470 292 570 400 572 C508 570 564 470 568 380 C555 440 520 470 480 462 C450 452 430 458 400 458 C370 458 350 452 320 462 C280 470 245 440 232 380 Z" fill="url(#beard)"/>
-    <path d="M330 520 C360 560 440 560 470 520" stroke="#C9C3BC" stroke-width="10" stroke-linecap="round" fill="none" opacity=".6"/>
+    <!-- barba curta: contorno do queixo, com mandíbula e entorno da boca -->
+    <path d="M236 410 C250 520 320 570 400 572 C480 570 550 520 564 410 C556 450 530 470 498 470 C470 462 436 458 400 458 C364 458 330 462 302 470 C270 470 244 450 236 410 Z" fill="url(#beard)" opacity=".82"/>
     <!-- bigode -->
-    <path d="M335 450 C360 425 385 440 400 448 C415 440 440 425 465 450 C440 462 420 458 400 462 C380 458 360 462 335 450 Z" fill="#5A4333"/>
+    <path d="M350 452 C372 436 390 444 400 450 C410 444 428 436 450 452 C432 460 418 456 400 460 C382 456 368 460 350 452 Z" fill="#5A4333" opacity=".85"/>
     <!-- boca -->
     <path d="M365 484 C385 494 415 494 435 484" stroke="#8A4E48" stroke-width="9" stroke-linecap="round" fill="none"/>
     <path d="M375 484 C390 490 410 490 425 484" stroke="#E8A19B" stroke-width="4" stroke-linecap="round" fill="none"/>
