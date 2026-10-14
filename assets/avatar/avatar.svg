@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Avatar caricatura 1stgeniusAI">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#16254A"/><stop offset="1" stop-color="#010B28"/>
+    </radialGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#6051EB"/><stop offset="1" stop-color="#E879F9"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3C4A2"/><stop offset="1" stop-color="#DE9F7C"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7A5A3E"/><stop offset="1" stop-color="#4A3426"/>
+    </linearGradient>
+    <linearGradient id="beard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A4333"/><stop offset=".7" stop-color="#6B5A4E"/><stop offset="1" stop-color="#A9A39C"/>
+    </linearGradient>
+    <radialGradient id="iris" cx="50%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#CFEFFF"/><stop offset=".6" stop-color="#7FB8DE"/><stop offset="1" stop-color="#3F7FB0"/>
+    </radialGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity=".35"/><stop offset="1" stop-color="#E879F9" stop-opacity=".25"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="hex"><path d="M400 40 L725 220 L725 580 L400 760 L75 580 L75 220 Z"/></clipPath>
+  </defs>
+
+  <!-- fundo -->
+  <rect width="800" height="800" fill="#010B28"/>
+  <g clip-path="url(#hex)">
+    <rect width="800" height="800" fill="url(#bg)"/>
+    <!-- circuitos -->
+    <g stroke="#22D3EE" stroke-opacity=".35" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M90 300 H190 L230 340 H300"/><path d="M90 380 H150 L190 420"/><path d="M110 520 H210 L250 560 H320"/>
+      <path d="M710 300 H610 L570 340 H500"/><path d="M710 380 H650 L610 420"/><path d="M690 520 H590 L550 560 H480"/>
+    </g>
+    <g fill="#22D3EE" fill-opacity=".7"><circle cx="90" cy="300" r="6"/><circle cx="190" cy="420" r="6"/><circle cx="110" cy="520" r="6"/></g>
+    <g fill="#E879F9" fill-opacity=".8"><circle cx="710" cy="300" r="6"/><circle cx="610" cy="420" r="6"/><circle cx="690" cy="520" r="6"/></g>
+    <circle cx="400" cy="400" r="290" fill="none" stroke="url(#neon)" stroke-opacity=".25" stroke-width="2" stroke-dasharray="4 14"/>
+    <circle cx="400" cy="330" r="230" fill="#6051EB" opacity=".28" filter="url(#glow)"/>
+
+    <!-- corpo -->
+    <path d="M60 800 C70 650 190 600 300 585 L500 585 C610 600 730 650 740 800 Z" fill="#0A0A12"/>
+    <!-- gola polo -->
+    <path d="M300 585 L345 640 L400 600 L455 640 L500 585 L460 560 L340 560 Z" fill="#14141F" stroke="#2A2A3C" stroke-width="3"/>
+    <path d="M400 600 V700" stroke="#2A2A3C" stroke-width="3"/><circle cx="400" cy="640" r="6" fill="#d9d9e6"/>
+    <!-- logo peito -->
+    <g transform="translate(505 665)"><rect width="30" height="20" fill="#fff" rx="2"/><rect width="15" height="10" fill="#1F3B8A"/><rect x="15" width="15" height="10" fill="#fff"/><rect y="10" width="15" height="10" fill="#fff"/><rect x="15" y="10" width="15" height="10" fill="#D7263D"/></g>
+
+    <!-- pescoço -->
+    <path d="M335 520 L335 580 Q400 625 465 580 L465 520 Z" fill="#D9967A"/>
+
+    <!-- orelhas -->
+    <ellipse cx="228" cy="385" rx="26" ry="42" fill="#E3AB8B"/>
+    <ellipse cx="572" cy="385" rx="26" ry="42" fill="#E3AB8B"/>
+
+    <!-- cabeça (grande, caricatura) -->
+    <path d="M400 125 C255 125 218 250 226 360 C232 470 290 565 400 565 C510 565 568 470 574 360 C582 250 545 125 400 125 Z" fill="url(#skin)"/>
+
+    <!-- barba grisalha -->
+    <path d="M232 380 C236 470 292 570 400 572 C508 570 564 470 568 380 C555 440 520 470 480 462 C450 452 430 458 400 458 C370 458 350 452 320 462 C280 470 245 440 232 380 Z" fill="url(#beard)"/>
+    <path d="M330 520 C360 560 440 560 470 520" stroke="#C9C3BC" stroke-width="10" stroke-linecap="round" fill="none" opacity=".6"/>
+    <!-- bigode -->
+    <path d="M335 450 C360 425 385 440 400 448 C415 440 440 425 465 450 C440 462 420 458 400 462 C380 458 360 462 335 450 Z" fill="#5A4333"/>
+    <!-- boca -->
+    <path d="M365 484 C385 494 415 494 435 484" stroke="#8A4E48" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M375 484 C390 490 410 490 425 484" stroke="#E8A19B" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+    <!-- nariz -->
+    <path d="M400 340 C388 385 372 405 372 418 C372 436 428 436 428 418 C428 405 412 385 400 340 Z" fill="#CF8F72" opacity=".75"/>
+
+    <!-- sobrancelhas -->
+    <path d="M280 322 C305 304 345 304 368 322" stroke="#4A3426" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M432 322 C455 304 495 304 520 322" stroke="#4A3426" stroke-width="12" stroke-linecap="round" fill="none"/>
+
+    <!-- olhos azuis grandes -->
+    <g>
+      <ellipse cx="322" cy="360" rx="40" ry="28" fill="#fff"/><circle cx="322" cy="360" r="22" fill="url(#iris)"/><circle cx="322" cy="360" r="9" fill="#0B1230"/><circle cx="314" cy="351" r="6" fill="#fff"/>
+      <ellipse cx="478" cy="360" rx="40" ry="28" fill="#fff"/><circle cx="478" cy="360" r="22" fill="url(#iris)"/><circle cx="478" cy="360" r="9" fill="#0B1230"/><circle cx="470" cy="351" r="6" fill="#fff"/>
+      <path d="M282 352 C300 330 345 330 362 352" stroke="#3a2a20" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M438 352 C455 330 500 330 518 352" stroke="#3a2a20" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- óculos neon -->
+    <g filter="url(#glow)">
+      <rect x="268" y="326" width="108" height="76" rx="14" fill="url(#lens)" stroke="#0B1230" stroke-width="10"/>
+      <rect x="424" y="326" width="108" height="76" rx="14" fill="url(#lens)" stroke="#0B1230" stroke-width="10"/>
+      <path d="M376 350 Q400 338 424 350" stroke="#0B1230" stroke-width="10" fill="none"/>
+      <path d="M268 346 L232 338 M532 346 L568 338" stroke="#0B1230" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    <rect x="268" y="326" width="108" height="76" rx="14" fill="none" stroke="#22D3EE" stroke-width="2.5" opacity=".9"/>
+    <rect x="424" y="326" width="108" height="76" rx="14" fill="none" stroke="#E879F9" stroke-width="2.5" opacity=".9"/>
+    <path d="M285 345 L315 345 M440 345 L470 345" stroke="#fff" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- cabelo penteado p/ trás, entradas -->
+    <path d="M222 330 C196 210 270 100 400 100 C535 100 610 210 578 330 C572 270 555 215 520 190 C470 175 410 170 350 182 C300 195 262 235 250 285 C246 305 240 320 222 330 Z" fill="url(#hair)"/>
+    <g stroke="#9C7A58" stroke-width="5" stroke-linecap="round" fill="none" opacity=".75">
+      <path d="M300 200 C350 160 440 150 520 185"/><path d="M285 230 C340 190 440 180 535 215"/><path d="M270 262 C330 222 440 212 548 250"/>
+    </g>
+    <path d="M240 300 C236 270 250 240 268 222" stroke="#A9A39C" stroke-width="6" stroke-linecap="round" fill="none" opacity=".7"/>
+    <path d="M560 300 C564 270 550 240 532 222" stroke="#A9A39C" stroke-width="6" stroke-linecap="round" fill="none" opacity=".7"/>
+  </g>
+
+  <!-- moldura hex neon -->
+  <path d="M400 40 L725 220 L725 580 L400 760 L75 580 L75 220 Z" fill="none" stroke="url(#neon)" stroke-width="10" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- selo -->
+  <g transform="translate(400 735)">
+    <rect x="-128" y="-26" width="256" height="52" rx="26" fill="#010B28" stroke="url(#neon)" stroke-width="3"/>
+    <text text-anchor="middle" y="9" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="26" fill="#F2F4FA" letter-spacing="1">1st<tspan fill="#22D3EE">genius</tspan><tspan fill="#E879F9">AI</tspan></text>
+  </g>
+</svg>
